@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "error-broker": {
+      "command": "node",
+      "args": [
+        "/Users/a.m.sultan/Apps/error-broker/dist/cli.js",
+        "mcp"
+      ]
+    }
+  }
+}

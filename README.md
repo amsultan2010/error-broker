@@ -112,6 +112,33 @@ Put `taxonomy.yaml` and `strategies.yaml` in that folder. Examples live in `defa
 - `list_strategies`: show recovery rules
 - `reset_attempts`: clear counters for a run
 
+## SDK
+
+The npm package is the SDK. Import it in your agent code:
+
+```js
+import { createBroker, handle, classifyError } from "error-broker";
+
+const broker = createBroker();
+const result = broker.handle({
+  status: 503,
+  message: "service unavailable",
+  context: { run_id: "batch-9", tool: "search" },
+});
+
+if (result.should_retry) {
+  // wait result.wait_seconds, then retry your call
+}
+```
+
+See `examples/sdk-usage.mjs`.
+
+Until the package is on npm, install from GitHub:
+
+```bash
+npm i github:amsultan2010/error-broker
+```
+
 ## Development
 
 ```bash
@@ -119,8 +146,20 @@ npm install
 npm test
 npm run build
 node dist/cli.js classify '{"status":429,"message":"rate limit"}'
+node examples/sdk-usage.mjs
 ```
+
+## Cursor Marketplace
+
+This repo is packaged as a Cursor plugin (`.cursor-plugin/plugin.json` + `mcp.json`).
+
+Submit it at: https://cursor.com/marketplace/publish
+
+Cursor reviews marketplace plugins manually. Use this repo URL:
+
+https://github.com/amsultan2010/error-broker
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
+The MIT license is fully set up: LICENSE file in the repo root and `"license": "MIT"` in package.json.

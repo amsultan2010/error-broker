@@ -1,0 +1,21 @@
+{
+  "name": "error-broker",
+  "version": "0.1.0",
+  "description": "Classify agent errors and get recovery advice: retry, wait, or escalate. MCP tools plus optional SDK.",
+  "author": {
+    "name": "Abdullah Sultan",
+    "email": "abdullahmsultan1@gmail.com"
+  },
+  "logo": "assets/logo.svg",
+  "keywords": [
+    "errors",
+    "agents",
+    "mcp",
+    "retry",
+    "rate-limit",
+    "error-handling",
+    "reliability"
+  ],
+  "mcp": "mcp.json",
+  "skills": ["skills/"]
+}
