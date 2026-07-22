@@ -1,0 +1,64 @@
+{
+  "name": "error-broker",
+  "version": "0.1.0",
+  "description": "Structured error classification and recovery strategies for AI agents",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "error-broker": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "defaults",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "npm run build",
+    "cli": "node dist/cli.js",
+    "mcp": "node dist/mcp.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agents",
+    "mcp",
+    "errors",
+    "retry",
+    "langchain",
+    "claude",
+    "cursor",
+    "error-handling"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amsultan2010/error-broker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amsultan2010/error-broker/issues"
+  },
+  "homepage": "https://github.com/amsultan2010/error-broker#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "yaml": "^2.7.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9"
+  }
+}

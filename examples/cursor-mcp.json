@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "error-broker": {
+      "command": "npx",
+      "args": ["-y", "github:amsultan2010/error-broker", "mcp"]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+default_max_attempts: 3
+strategies:
+  rate_limit:
+    action: retry
+    wait_seconds: 60
+    max_attempts: 3
+    backoff: exponential
+    reason: Rate limited. Wait, then retry.
+  quota:
+    action: escalate
+    max_attempts: 1
+    reason: Quota or billing issue. Do not retry. Notify a human.
+  auth:
+    action: escalate
+    max_attempts: 1
+    reason: Auth failed. Fix credentials before retrying.
+  timeout:
+    action: retry
+    wait_seconds: 5
+    max_attempts: 3
+    backoff: exponential
+    reason: Timed out. Retry with backoff.
+  network:
+    action: retry
+    wait_seconds: 3
+    max_attempts: 3
+    backoff: exponential
+    reason: Network error. Retry with backoff.
+  overloaded:
+    action: retry
+    wait_seconds: 15
+    max_attempts: 4
+    backoff: exponential
+    reason: Upstream overloaded. Wait, then retry.
+  context_overflow:
+    action: escalate
+    max_attempts: 1
+    reason: Context too large. Compress or trim context before retrying. Do not blind-retry.
+  invalid_response:
+    action: retry
+    wait_seconds: 1
+    max_attempts: 2
+    backoff: fixed
+    reason: Bad response shape. Retry once with stricter parsing or prompting.
+  not_found:
+    action: escalate
+    max_attempts: 1
+    reason: Resource not found. Fix the path, model, or id. Do not retry blindly.
+  tool_failure:
+    action: retry
+    wait_seconds: 2
+    max_attempts: 2
+    backoff: fixed
+    reason: Tool failed. Retry once, then escalate.
+  unknown:
+    action: retry
+    wait_seconds: 2
+    max_attempts: 2
+    backoff: fixed
+    reason: Unknown error. Limited retry, then escalate.

@@ -1,0 +1,155 @@
+categories:
+  rate_limit:
+    description: Provider or API rate limit hit
+    match:
+      - status: 429
+      - message_contains:
+          - rate limit
+          - rate_limit
+          - too many requests
+          - requests per minute
+          - rpm limit
+          - tpm limit
+      - code:
+          - rate_limit_exceeded
+          - rate_limit_error
+          - too_many_requests
+  quota:
+    description: Billing, credits, or usage quota exhausted
+    match:
+      - status: 402
+      - message_contains:
+          - insufficient_quota
+          - insufficient credits
+          - quota exceeded
+          - billing
+          - payment required
+          - credit balance
+          - usage limit
+      - code:
+          - insufficient_quota
+          - billing_not_active
+          - credit_balance_too_low
+  auth:
+    description: Authentication or authorization failure
+    match:
+      - status: [401, 403]
+      - message_contains:
+          - unauthorized
+          - invalid api key
+          - invalid_api_key
+          - authentication
+          - expired token
+          - access denied
+          - permission denied
+          - forbidden
+      - code:
+          - invalid_api_key
+          - authentication_error
+          - permission_denied
+      - exception_type:
+          - AuthenticationError
+          - PermissionError
+          - UnauthorizedError
+  timeout:
+    description: Request or tool timed out
+    match:
+      - status: [408, 504]
+      - message_contains:
+          - timed out
+          - timeout
+          - deadline exceeded
+          - context deadline
+      - code:
+          - timeout
+          - request_timeout
+      - exception_type:
+          - TimeoutError
+          - AbortError
+  network:
+    description: Network or connectivity failure
+    match:
+      - status: [502, 503]
+      - message_contains:
+          - econnreset
+          - econnrefused
+          - enotfound
+          - network error
+          - socket hang up
+          - fetch failed
+          - connection reset
+          - dns
+      - exception_type:
+          - FetchError
+          - NetworkError
+          - ConnectTimeoutError
+  overloaded:
+    description: Upstream service temporarily overloaded
+    match:
+      - status: 529
+      - message_contains:
+          - overloaded
+          - capacity
+          - temporarily unavailable
+          - high demand
+      - code:
+          - overloaded_error
+          - server_overloaded
+  context_overflow:
+    description: Prompt or context window exceeded
+    match:
+      - message_contains:
+          - context length
+          - context_length
+          - maximum context
+          - token limit
+          - too many tokens
+          - context window
+          - prompt is too long
+          - max_tokens
+      - code:
+          - context_length_exceeded
+          - max_tokens
+          - prompt_too_long
+  invalid_response:
+    description: Malformed or unparseable model/tool response
+    match:
+      - message_contains:
+          - unexpected token
+          - invalid json
+          - json parse
+          - malformed
+          - parse error
+          - syntaxerror
+          - not valid json
+          - unexpected end of json
+      - exception_type:
+          - SyntaxError
+          - JSONDecodeError
+          - ValidationError
+          - ZodError
+  not_found:
+    description: Resource, model, or path not found
+    match:
+      - status: 404
+      - message_contains:
+          - not found
+          - does not exist
+          - no such file
+          - enoent
+          - model_not_found
+      - code:
+          - not_found
+          - model_not_found
+  tool_failure:
+    description: Tool or MCP call failed
+    match:
+      - message_contains:
+          - tool error
+          - tool failed
+          - mcp error
+          - tool call failed
+      - source: [tool, mcp]
+  unknown:
+    description: Unrecognized error
+    match: []
