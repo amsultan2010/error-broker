@@ -106,11 +106,11 @@ Put `taxonomy.yaml` and `strategies.yaml` in that folder. Examples live in `defa
 
 ## MCP tools
 
-- `classify_error` — map an error to a category
-- `handle_error` — classify plus recovery advice
-- `list_categories` — show taxonomy
-- `list_strategies` — show recovery rules
-- `reset_attempts` — clear counters for a run
+- `classify_error`: map an error to a category
+- `handle_error`: classify plus recovery advice
+- `list_categories`: show taxonomy
+- `list_strategies`: show recovery rules
+- `reset_attempts`: clear counters for a run
 
 ## Development
 
